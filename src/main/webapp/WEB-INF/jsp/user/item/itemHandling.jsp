@@ -1,39 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../common/navi.jspf"%>
 
 <script>
 
-  $(function() {
-    $("#tableitem tr").click(function(){
-      
-      var tr = $(this);
-      var td = tr.children();
-      
-      //console.log("클릭됨 : " + tr.text());
-      
-      	var id = td.eq(0).text();
-		var name = td.eq(2).text();
-		var quentity = td.eq(8).text();
 
-		//console.log(name);
-		
-		$.ajax({
-		  type:'get',
-		  url:'/user/item/itemHandling',
-		  data : {change_id : id },
-		  
-		  success : function(response){
-		    document.getElementById("inputName").value=name;
-		    document.getElementById("inputQuentity").value=quentity;
-		    document.getElementById("change_id").value=id;
+function historyCheckBtn(form){
+  form.action="/user/item/itemHistory";
+  form.submit();
+  return true;
+}
 
-		  }
-		})
+$(function() {
+  $("#tableitem tr").click(function(){
+    
+    var tr = $(this);
+    var td = tr.children();
+    
+    //console.log("클릭됨 : " + tr.text());
+    
+    var id = td.eq(0).text();
+	var name = td.eq(2).text();
+	var quantity = td.eq(8).text();
 
-    })
-  
+	//console.log(name);
+	
+	$.ajax({
+	  type:'get',
+	  url:'/user/item/itemHistory',
+	  data : {change_id : id },
+	  
+	  success : function(response){
+	    document.getElementById("inputName").value=name;
+	    document.getElementById("inputQuentity").value=quantity;
+	    document.getElementById("change_id").value=id;
+
+	  }
+	})
+
   })
+
+})
 
     
   
@@ -64,7 +72,7 @@
             <td>${item.name}</td>
             <td>${item.firstAttr}</td>
             <td>${item.secondAttr}</td>
-            <td>${item.price}</td>
+            <td><fmt:formatNumber value="${item.price}" pattern="#,###"></fmt:formatNumber></td>
             <td>${item.contractDate}</td>
             <td>${item.used}</td>
             <td>${item.quantity}</td>
@@ -77,7 +85,7 @@
 
 
   <div class="bg-blue-100 flex-col ml-2 w-full container rounded-md">
-    <div class="mb-2 flex justify-center bg-white font-bold text-blue-600 border border-blue-500 rounded-md">자재 변동
+    <div class="mb-2 flex justify-center bg-blue-500 font-bold text-white py-3 rounded-md">자재 변동
       기입</div>
 
     <form action="/user/item/doitemHandling" class="px-2 flex flex-col">
@@ -86,12 +94,12 @@
       <div>
 
 
-        <input id="inputName" required="required" type="text" class="input mb-2 " placeholder="변동 자재를 선택해주세요" readonly />
+        자재 이름 : <input id="inputName" required="required" type="text" class="input mb-2 w-full" placeholder="변동 대상 선택" readonly />
 
-        <input id="inputQuentity" required="required" type="text" class="input mb-2 min-w-3" placeholder="현재 수량"
+        자재 현재 수량 : <input id="inputQuentity" required="required" type="text" class="input mb-2 w-full" placeholder="변동 대상 선택"
           readonly />
 
-        <input name="change_id" id="change_id" required="required" type="text" class="input selectedId mb-2 min-w-3" placeholder="선택 자재" readonly />
+        자재 코드 : <input name="change_id" id="change_id" required="required" type="text" class="input selectedId mb-2 w-full" placeholder="변동 대상 선택" readonly />
 
 
       </div>
@@ -109,11 +117,11 @@
         변동작업 :
         <label>
           입고
-          <input name="change_state" type="radio" name="radio-1" class="radio" checked value="1">
+          <input name="change_state" type="radio" name="radio-1" class="radio" checked value="입고" style="width:30px;height:15px">
         </label>
         <label>
           출고
-          <input name="change_state" type="radio" name="radio-1" class="radio" value="2">
+          <input name="change_state" type="radio" name="radio-1" class="radio" value="출고" style="width:30px;height:15px">
         </label>
 
       </div>
@@ -129,13 +137,10 @@
 
       <div class="flex justify-center ">
 
-        <button class="btn mr-2 btn-primary" type="submit">변동자재 등록</button>
-        <button class="btn btn-error">뒤로가기</button>
-
+        <button class="btn mr-2 btn-primary" type="submit">등록</button>
+        <button class="btn mr-2 btn-success" type="" onclick='return historyCheckBtn(this.form);'>이력확인(개발중)</button>
 
       </div>
-
-
 
     </form>
   </div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../common/navi.jspf"%>
 <div class="flex">
   <div class="">
@@ -25,10 +26,10 @@
             <td>${item.name}</td>
             <td>${item.firstAttr}</td>
             <td>${item.secondAttr}</td>
-            <td>${item.price}</td>
+            <td><fmt:formatNumber value="${item.price}" pattern="#,###"></fmt:formatNumber></td>
             <td>${item.contractDate}</td>
             <td>${item.used}</td>
-            <td>${item.quentity}</td>
+            <td>${item.quantity}</td>
             
           </tr>
         </c:forEach>
@@ -38,7 +39,7 @@
 
 
   <div class="bg-blue-100 flex-col ml-2 w-full container rounded-md">
-    <div class="mb-2 flex justify-center bg-white font-bold text-blue-600 border border-blue-500 rounded-md">자재 신규 등록</div>
+    <div class="mb-2 flex justify-center bg-white font-bold text-blue-600 border border-blue-500 py-3 rounded-md">자재 신규 등록</div>
 
     <form action="/user/item/doSetItem" class="px-2 flex flex-col">
       <select name="category" class="select mb-2 w-full">
@@ -69,7 +70,7 @@
       <div class="flex justify-center">
 
         <button class="btn mr-2 btn-primary" type="submit">신규자재 등록</button>
-        <button class="btn btn-error">뒤로가기</button>
+        <button class="btn btn-error">선택 자재 수정(개발중)</button>
 
 
       </div>

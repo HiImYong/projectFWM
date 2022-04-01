@@ -9,10 +9,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class HandleItem {
 	
-	private int change_state;
+	private int id;
+	private String change_state;
 	private int place;
 	private String change_date;
-	private int change_quantit;
+	private int change_quantity;
+	private int change_id;
+	private int price;
+	private String name;
+	private String placeName;
+
 	
 
 }
