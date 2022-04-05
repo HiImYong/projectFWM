@@ -57,11 +57,11 @@ public class UserItemCtrl {
 
 	@RequestMapping("/user/item/doitemHandling")
 	@ResponseBody
-	public String doitemHandling(int change_id, String change_state, int place, String change_date, int change_quantity) {
+	public String doitemHandling(int change_id, String change_state, int place, String change_date,
+			int change_quantity) {
 
 		useritemserv.servDoitemHandling(change_id, change_state, place, change_date, change_quantity);
 		useritemserv.servDoitemHandlingUpdate(change_id, change_state, change_quantity);
-		
 
 		return """
 				<script>
@@ -71,8 +71,8 @@ public class UserItemCtrl {
 				""";
 
 	}
-	
-	
+
+// 자재 변경 이력 보기
 	@RequestMapping("/user/item/itemHistory")
 	public String itemHistory(Model model, int change_id) {
 
@@ -82,23 +82,28 @@ public class UserItemCtrl {
 
 		return "/user/item/itemHistory";
 	}
-	
-	
+
+// 자재 변경 이력 수정
 	@RequestMapping("/user/item/updateItemHistory")
 	@ResponseBody
-	public String updateItemHistory(int change_id, int original_quantity, int change_historyId, String change_state, String original_state, int place, String change_date, int change_quantity) {
+	public String updateItemHistory(int change_id, int original_quantity, int change_historyId, String change_state,
+			String original_state, int place, String change_date, int change_quantity) {
 
 		useritemserv.servReturnitemHandlingUpdate(change_id, original_state, original_quantity);
 		useritemserv.servUpdateItemHistory(change_historyId, change_state, place, change_date, change_quantity);
 		useritemserv.servDoitemHandlingUpdate(change_id, change_state, change_quantity);
-
 
 		return """
 				<script>
 				alert("자재 수량이 변경되었습니다.");
 				location.replace('/user/item/itemHandling');
 				</script>
-				""";	}
+				""";
+	}
 	
 	
+
+
+
 }
+
