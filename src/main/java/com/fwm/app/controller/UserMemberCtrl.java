@@ -31,6 +31,15 @@ public class UserMemberCtrl {
 		if (session.getAttribute("loginId") != null) {
 			return "/user/common/alert";
 		}
+		
+		if (session.getAttribute("loginId") != null) {
+			return """
+					<script>
+					alert("이미 로그인 되어있음");
+					location.replace('/user/item/main');
+					</script>
+					""";
+		}
 
 		return "/user/member/showLogin";
 	} 

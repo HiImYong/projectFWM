@@ -5,7 +5,6 @@
 
 <script>
 
-
 function historyCheckBtn(form){
   form.action="/user/item/main";
   form.submit();
@@ -57,7 +56,6 @@ function historyCheckBtn(form){
           <th>변동자재</th>
           <th>대상위치</th>
           <th>상태이력</th>
-          <th>변동대상</th>
           <th>변동수량</th>          
           <th>변동날짜</th>
           <th>자재단가</th>
@@ -65,7 +63,7 @@ function historyCheckBtn(form){
 
         </tr>
       </thead>
-      <tbody>
+      <tbody  class="mb-5">
         <c:forEach var="item" items="${items}">
           <tr class="cursor-pointer hover:underline" id="hi">
             <td class="hidden">${item.id}</td>
@@ -83,7 +81,7 @@ function historyCheckBtn(form){
   </div>
 
 
-  <div class="bg-blue-100 flex-col ml-2 w-full container rounded-md">
+  <div class="mb-5 bg-blue-100 flex-col ml-2 w-full container rounded-md">
     <div class="mb-2 flex justify-center bg-red-500 font-bold text-white py-3 rounded-md">변동이력 / 이력삭제(개발중)</div>
 
     <form action="/user/item/updateItemHistory" class="px-2 flex flex-col">

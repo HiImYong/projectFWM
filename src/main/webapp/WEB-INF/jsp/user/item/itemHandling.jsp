@@ -4,13 +4,18 @@
 <%@ include file="../common/navi.jspf"%>
 
 <script>
-
+window.onpageshow = function(event) {
+  if (event.persisted) {
+      document.location.reload();
+  }
+};
 
 function historyCheckBtn(form){
   form.action="/user/item/itemHistory";
   form.submit();
   return true;
-}
+};
+
 
 $(function() {
   $("#tableitem tr").click(function(){
@@ -64,7 +69,7 @@ $(function() {
           <th>현재수량</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="mb-5">
         <c:forEach var="item" items="${items}">
           <tr class="cursor-pointer hover:underline" id="hi">
             <td class="hidden">${item.id}</td>
@@ -84,7 +89,7 @@ $(function() {
   </div>
 
 
-  <div class="bg-blue-100 flex-col ml-2 w-full container rounded-md">
+  <div class="mb-5 bg-blue-100 flex-col ml-2 w-full container rounded-md">
     <div class="mb-2 flex justify-center bg-blue-500 font-bold text-white py-3 rounded-md">자재 변동
       기입</div>
 
@@ -138,7 +143,7 @@ $(function() {
       <div class="flex justify-center ">
 
         <button class="btn mr-2 btn-primary" type="submit">등록</button>
-        <button class="btn mr-2 btn-success" type="" onclick='return historyCheckBtn(this.form);'>이력확인(개발중)</button>
+        <button class="btn mr-2 btn-success" type="button" onclick='return historyCheckBtn(this.form);'>이력확인(개발중)</button>
 
       </div>
 
