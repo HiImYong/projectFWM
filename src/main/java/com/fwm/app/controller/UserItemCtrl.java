@@ -20,6 +20,7 @@ public class UserItemCtrl {
 		this.useritemserv = useritemserv;
 	}
 
+// 메인 자재 창
 	@RequestMapping("/user/item/main")
 	public String showMain(Model model) {
 
@@ -30,6 +31,7 @@ public class UserItemCtrl {
 		return "/user/item/main";
 	}
 
+// 메인 자재 아이템 세팅
 	@RequestMapping("/user/item/doSetItem")
 	@ResponseBody
 	public String doSetItem(int category, String name, String firstAttr, String secondAttr, int price,
@@ -44,7 +46,30 @@ public class UserItemCtrl {
 				</script>
 				""";
 	}
+	
+// 메인 자재 조정 기능
+	@RequestMapping("/user/item/updateBasicInfo")
+	@ResponseBody
+	public String updateBasicInfo(int change_id, int category, String name, String firstAttr, String secondAttr, int price, 
+			String contractDate, int quantity, String used) {
 
+		useritemserv.servUpdateBasicInfo(change_id, category, name, firstAttr, secondAttr, price, contractDate, used);
+		useritemserv.servUpdateBasicQuantity(change_id, quantity);
+
+		return """
+				<script>
+				alert("자재 초기 정보 수정 완료.");
+				location.replace('/user/item/main');
+				</script>
+				""";
+	}
+	
+	
+	
+	
+/////----자재 변동 기능 컨트롤러 분리할 것----/////
+
+// 자재 변동창 조회
 	@RequestMapping("/user/item/itemHandling")
 	public String showhandleItem(Model model) {
 
@@ -55,6 +80,7 @@ public class UserItemCtrl {
 		return "/user/item/itemHandling";
 	}
 
+// 자재 변동창 자재 수정
 	@RequestMapping("/user/item/doitemHandling")
 	@ResponseBody
 	public String doitemHandling(int change_id, String change_state, int place, String change_date,

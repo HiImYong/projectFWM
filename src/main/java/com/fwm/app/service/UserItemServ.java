@@ -63,4 +63,17 @@ public class UserItemServ {
 		
 	}
 
+	public void servUpdateBasicInfo(int change_id, int category, String name, String firstAttr, String secondAttr, int price,
+			String contractDate, String used) {
+
+		useritemrepo.repoUpdateBasicInfo(change_id, category, name, firstAttr, secondAttr, price, contractDate, used);
+
+	}
+	
+	public void servUpdateBasicQuantity(int change_id, int quantity) {
+
+		useritemrepo.repoUpdateBasicQuantity(change_id, quantity);
+
+	}
+
 }

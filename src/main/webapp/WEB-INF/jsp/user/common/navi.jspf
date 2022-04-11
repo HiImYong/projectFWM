@@ -41,7 +41,7 @@
     </div>
   </div>
   <div class="navbar-center">
-    <a class="btn btn-ghost normal-case text-xl">자재 관리 시스템 만들어 봅시데이</a>
+    <a class="btn btn-ghost normal-case text-xl">자재 관리 시스템 for CMB</a>
   </div>
   <div class="navbar-end">
     <button class="btn btn-ghost btn-circle">

@@ -87,5 +87,33 @@ public interface UserItemRepo {
 			id = #{change_id};
 			""")
 	public void repoReturnitemHandlingUpdate(int change_id, String original_state, int original_quantity);
+	
+	
+	
+	
+	@Update("""
+			UPDATE Item
+			SET
+			category = #{category},
+			name = #{name},
+			firstAttr = #{firstAttr},
+			secondAttr = #{secondAttr},
+			price = #{price},
+			contractDate = #{contractDate},
+			used = #{used}
+			WHERE 
+			id = #{change_id};
+			""")
+	public void repoUpdateBasicInfo(int change_id, int category, String name, String firstAttr, String secondAttr, int price,
+			String contractDate, String used);
+	
+		
+	@Update("""
+			UPDATE Item i
+			SET
+			i.quantity = #{quantity} + (SELECT IFNULL (SUM( IF (h.change_state="출고",h.change_quantity*-1,change_quantity)) , 0) FROM HandleItem h WHERE h.change_id=#{change_id})
+			WHERE i.id = #{change_id};					
+			""")
+	public void repoUpdateBasicQuantity(int change_id, int quantity);
 
 }
